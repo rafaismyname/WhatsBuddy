@@ -1,0 +1,10 @@
+{
+  "extName": {
+    "message": "WhatsBuddy",
+    "description": "Extension name"
+  },
+  "extDesc": {
+    "message": "A Chrome & Firefox extension that adds extra functionalities to WhatsApp Web",
+    "description": "Extension description"
+  }
+}

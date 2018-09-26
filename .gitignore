@@ -1,0 +1,15 @@
+node_modules*
+.DS_Store*
+.sass-cache*
+Thumbs.ds*
+npm-debug.log*
+
+*.log
+
+extension/dist/
+
+.tmp
+
+# IntelliJ
+*.iml
+/.idea

@@ -1,0 +1,59 @@
+{
+  "name": "whatsbuddy",
+  "version": "1.0.0",
+  "description": "A Chrome & Firefox extension that adds extra functionalities to WhatsApp Web",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rafaismyname/whatsbuddy/issues"
+  },
+  "homepage": "https://github.com/rafaismyname/whatsbuddy",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rafaismyname/whatsbuddy"
+  },
+  "keywords": [
+    "whatsapp",
+    "tools",
+    "macros",
+    "extension",
+    "chrome-extension",
+    "firefox-addon"
+  ],
+  "scripts": {
+    "prebuild": "rimraf ./extension/dist/",
+    "start": "webpack --config webpack.config.js -w -d",
+    "build": "webpack --config webpack.production.config.js -p"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "compression-webpack-plugin": "^1.0.1",
+    "css-loader": "^0.28.7",
+    "eslint": "^4.13.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.5",
+    "html-loader": "^0.5.1",
+    "html-webpack-plugin": "^2.30.1",
+    "node-sass": "^4.6.0",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.19.0",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.8.1"
+  },
+  "standard": {
+    "globals": [
+      "browser",
+      "chrome",
+      "window"
+    ],
+    "ignore": [
+      "extension/dist/",
+      "node_modules/"
+    ]
+  }
+}
