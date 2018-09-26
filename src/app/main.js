@@ -1,6 +1,7 @@
+import { onChatOpen } from './utils/events';
+
 const MESSAGE_INPUT_PATH = '#main footer div[contenteditable]';
 const SEND_BUTTON_CHILD_PATH = '#main footer button span[data-icon=send]';
-const CHAT_CONTAINER_PATH = '#main div[data-asset-chat-background]';
 const CHAT_FOOTER_PATH = '#main div[data-asset-chat-background] ~ footer';
 
 const TOOLS_CONTAINER_ID = 'whatsbuddy-tools-container';
@@ -31,7 +32,7 @@ const insertMessageText = (text, autoSend = false) => {
   if (!messageInput) return true;
 
   return setTimeout(() => {
-    messageInput.innerHTML = text; // eslint-disable-line
+    messageInput.innerHTML = text;
 
     const focusEvent = new FocusEvent('focus', { bubbles: true });
     messageInput.dispatchEvent(focusEvent);
@@ -43,11 +44,9 @@ const insertMessageText = (text, autoSend = false) => {
   }, 0);
 };
 
-const onChatOpen = () => {
+onChatOpen(() => {
   const toolsContainer = document.createElement('div');
   toolsContainer.id = TOOLS_CONTAINER_ID;
-  toolsContainer.style.width = '100%';
-  toolsContainer.style.height = 'auto';
 
   const macrosContainer = document.createElement('div');
   macrosContainer.id = MACROS_CONTAINER_ID;
@@ -72,17 +71,4 @@ const onChatOpen = () => {
 
   const footerContainer = document.querySelector(CHAT_FOOTER_PATH);
   footerContainer.insertBefore(toolsContainer, footerContainer.firstChild);
-};
-
-const onNodeInserted = (element) => {
-  if (element.target.id !== 'main') return true;
-
-  const chatContainer = document.querySelector(CHAT_CONTAINER_PATH);
-  if (!chatContainer) return true;
-
-  onChatOpen();
-
-  return true;
-};
-
-document.addEventListener('DOMNodeInserted', onNodeInserted, false);
+});

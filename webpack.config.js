@@ -8,7 +8,6 @@ module.exports = {
     options: path.resolve(__dirname, 'src/app/options.js'),
     popup: path.resolve(__dirname, 'src/app/popup.js'),
     main: path.resolve(__dirname, 'src/app/main.js'),
-    background: path.resolve(__dirname, 'src/app/background.js')
   },
 
   output: {
