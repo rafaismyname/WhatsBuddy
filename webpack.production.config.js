@@ -6,9 +6,9 @@ const CompressionPlugin = require('compression-webpack-plugin')
 
 module.exports = {
   entry: {
-    options: path.resolve(__dirname, 'src/app/options.js'),
-    popup: path.resolve(__dirname, 'src/app/popup.js'),
-    main: path.resolve(__dirname, 'src/app/main.js'),
+    options: path.resolve(__dirname, 'src/scripts/options.js'),
+    popup: path.resolve(__dirname, 'src/scripts/popup.js'),
+    main: path.resolve(__dirname, 'src/scripts/main.js'),
   },
 
   output: {
@@ -19,7 +19,7 @@ module.exports = {
   resolve: {
     extensions: [ '.js', '.json', '.scss', '.css' ],
     alias: {
-      utils: path.resolve(__dirname, 'src/app/utils'),
+      utils: path.resolve(__dirname, 'src/scripts/utils'),
       images: path.resolve(__dirname, 'src/images'),
       styles: path.resolve(__dirname, 'src/styles')
     }
