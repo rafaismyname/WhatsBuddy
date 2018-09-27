@@ -1,7 +1,7 @@
-const webpack = require('webpack')
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -12,16 +12,16 @@ module.exports = {
 
   output: {
     path: path.resolve(__dirname, 'extension/dist'),
-    filename: '[name].js'
+    filename: '[name].js',
   },
 
   resolve: {
-    extensions: [ '.js', '.json', '.scss', '.css' ],
+    extensions: ['.js', '.json', '.scss', '.css'],
     alias: {
       utils: path.resolve(__dirname, 'src/scripts/utils'),
       images: path.resolve(__dirname, 'src/images'),
-      styles: path.resolve(__dirname, 'src/styles')
-    }
+      styles: path.resolve(__dirname, 'src/styles'),
+    },
   },
 
   module: {
@@ -29,34 +29,30 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.html$/,
-        loaders: [ 'html-loader' ]
+        loaders: ['html-loader'],
       },
       {
         test: /\.(scss|css)$/,
-        use: ExtractTextPlugin.extract(
-          {
-            fallback: 'style-loader',
-            use: [ 'css-loader', 'sass-loader' ]
-          }
-        )
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader'],
+        }),
       },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
         loader: 'url-loader',
-        options: {
-          limit: 10000
-        }
-      }
-    ]
+        options: { limit: 10000 },
+      },
+    ],
   },
 
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
+      'process.env.NODE_ENV': JSON.stringify('development'),
     }),
 
     new HtmlWebpackPlugin({
@@ -64,7 +60,7 @@ module.exports = {
       filename: 'options.html',
       chunks: ['options'],
       inject: true,
-      minify: {}
+      minify: {},
     }),
 
     new HtmlWebpackPlugin({
@@ -72,15 +68,15 @@ module.exports = {
       filename: 'popup.html',
       chunks: ['popup'],
       inject: true,
-      minify: {}
+      minify: {},
     }),
 
     new ExtractTextPlugin('[name].css'),
 
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.NamedModulesPlugin()
+    new webpack.NamedModulesPlugin(),
   ],
 
-  devtool: 'eval-cheap-module-source-map'
-}
+  devtool: 'eval-cheap-module-source-map',
+};
