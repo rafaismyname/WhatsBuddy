@@ -18,7 +18,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.json', '.scss', '.css'],
     alias: {
-      utils: path.resolve(__dirname, 'src/scripts/utils'),
+      scripts: path.resolve(__dirname, 'src/scripts'),
       images: path.resolve(__dirname, 'src/images'),
       styles: path.resolve(__dirname, 'src/styles'),
     },

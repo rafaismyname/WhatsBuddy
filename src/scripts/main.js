@@ -1,6 +1,8 @@
 import * as storage from './utils/storage';
 import { onDocumentReady, onChatOpen } from './utils/events';
 
+import '../styles/main.scss';
+
 const MESSAGE_INPUT_SELECTOR = '#main footer div[contenteditable]';
 const SEND_BUTTON_CHILD_SELECTOR = '#main footer button span[data-icon=send]';
 const CHAT_FOOTER_SELECTOR = '#main div[data-asset-chat-background] ~ footer';
