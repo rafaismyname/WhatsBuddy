@@ -5,23 +5,19 @@
   </head>
   <body>
     <main>
-      <div class="field">
-        <label>Default input</label>
-        <input type="text" class="text" id="default-input">
-      </div>
-      <div class="field">
-        <label>
-          <input type="checkbox" id="default-checkbox"><span>Default Checkbox</span>
-        </label>
-      </div>
-      <div class="field">
-        <div class="half">
-          <div class="response"></div>
-        </div>
-        <div class="half">
-          <button class="save-options">Save options</button>
-        </div>
-      </div>
+      <table>
+        <thead>
+          <th>Name</th>
+          <th>Message</th>
+          <th>&nbsp;</th>
+        </thead>
+        <tbody id="whatsbuddy-options-macros">
+        </tbody>
+      </table>
+      <button id="whatsbuddy-options-add-macro">+ Macro</button>
     </main>
+    <footer>
+      <button id="whatsbuddy-options-save">Save options</button>
+    </footer>
   </body>
 </html>

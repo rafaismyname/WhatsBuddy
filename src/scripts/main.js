@@ -1,21 +1,19 @@
-import { onChatOpen } from './utils/events';
+import * as storage from './utils/storage';
+import { onDocumentReady, onChatOpen } from './utils/events';
 
-const MESSAGE_INPUT_PATH = '#main footer div[contenteditable]';
-const SEND_BUTTON_CHILD_PATH = '#main footer button span[data-icon=send]';
-const CHAT_FOOTER_PATH = '#main div[data-asset-chat-background] ~ footer';
+const MESSAGE_INPUT_SELECTOR = '#main footer div[contenteditable]';
+const SEND_BUTTON_CHILD_SELECTOR = '#main footer button span[data-icon=send]';
+const CHAT_FOOTER_SELECTOR = '#main div[data-asset-chat-background] ~ footer';
 
 const TOOLS_CONTAINER_ID = 'whatsbuddy-tools-container';
 const MACROS_CONTAINER_ID = 'whatsbuddy-macros-container';
 const MACRO_BUTTON_CLASSNAME = 'whatsbuddy-macros-button';
 
-const chatMacros = {
-  ola: 'opa! bao?',
-  test: 'testando umas paradas aqui',
-};
+const chatMacros = [];
 
 const sendMessage = () => {
   setTimeout(() => {
-    const sendButtonSpan = document.querySelector(SEND_BUTTON_CHILD_PATH);
+    const sendButtonSpan = document.querySelector(SEND_BUTTON_CHILD_SELECTOR);
     if (!sendButtonSpan) return true;
 
     const sendButton = sendButtonSpan.parentNode;
@@ -28,7 +26,7 @@ const sendMessage = () => {
 };
 
 const insertMessageText = (text, autoSend = false) => {
-  const messageInput = document.querySelector(MESSAGE_INPUT_PATH);
+  const messageInput = document.querySelector(MESSAGE_INPUT_SELECTOR);
   if (!messageInput) return true;
 
   return setTimeout(() => {
@@ -51,12 +49,10 @@ onChatOpen(() => {
   const macrosContainer = document.createElement('div');
   macrosContainer.id = MACROS_CONTAINER_ID;
 
-  Object.keys(chatMacros).forEach((macro) => {
-    const message = chatMacros[macro];
-
+  chatMacros.forEach(({ name, message }) => {
     const macroButton = document.createElement('button');
     macroButton.className = MACRO_BUTTON_CLASSNAME;
-    macroButton.innerHTML = macro;
+    macroButton.innerHTML = name;
     macroButton.dataset.message = message;
 
     macroButton.addEventListener('click', (event) => {
@@ -69,6 +65,11 @@ onChatOpen(() => {
 
   toolsContainer.appendChild(macrosContainer);
 
-  const footerContainer = document.querySelector(CHAT_FOOTER_PATH);
+  const footerContainer = document.querySelector(CHAT_FOOTER_SELECTOR);
   footerContainer.insertBefore(toolsContainer, footerContainer.firstChild);
+});
+
+onDocumentReady(() => {
+  const storageParams = { macros: [] };
+  storage.get(storageParams).then(({ macros }) => chatMacros.push(...macros));
 });
