@@ -1,4 +1,4 @@
-import storage from './utils/storage';
+import * as storage from './utils/storage';
 import { onDocumentReady } from './utils/events';
 
 import '../styles/options.scss';
