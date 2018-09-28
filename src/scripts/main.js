@@ -11,10 +11,10 @@ const TOOLS_CONTAINER_ID = 'whatsbuddy-tools-container';
 const TOOLS_BUTTON_CLASSNAME = 'whatsbuddy-tools-button';
 const MACROS_CONTAINER_ID = 'whatsbuddy-macros-container';
 const MACRO_BUTTON_CLASSNAME = 'whatsbuddy-macros-button';
-const BOLD_BUTTON_CLASSNAME = 'whatsbuddy-bold-button';
-const ITALIC_BUTTON_CLASSNAME = 'whatsbuddy-italic-button';
-const STRIKE_BUTTON_CLASSNAME = 'whatsbuddy-strike-button';
-const MONOSPACE_BUTTON_CLASSNAME = 'whatsbuddy-monospace-button';
+const BOLD_BUTTON_ID = 'whatsbuddy-bold-button';
+const ITALIC_BUTTON_ID = 'whatsbuddy-italic-button';
+const STRIKE_BUTTON_ID = 'whatsbuddy-strike-button';
+const MONOSPACE_BUTTON_ID = 'whatsbuddy-monospace-button';
 
 const chatMacros = [];
 
@@ -88,28 +88,32 @@ onChatOpen(() => {
   });
 
   const boldButton = document.createElement('button');
-  boldButton.className = `${TOOLS_BUTTON_CLASSNAME} ${BOLD_BUTTON_CLASSNAME}`;
+  boldButton.id = BOLD_BUTTON_ID;
+  boldButton.className = TOOLS_BUTTON_CLASSNAME;
   boldButton.innerHTML = '<strong>B</strong>';
   boldButton.addEventListener('click', () => formatSelectedText('*'));
 
   macrosContainer.appendChild(boldButton);
 
   const italicButton = document.createElement('button');
-  italicButton.className = `${TOOLS_BUTTON_CLASSNAME} ${ITALIC_BUTTON_CLASSNAME}`;
+  italicButton.id = ITALIC_BUTTON_ID;
+  italicButton.className = TOOLS_BUTTON_CLASSNAME;
   italicButton.innerHTML = '<em>I</em>';
   italicButton.addEventListener('click', () => formatSelectedText('_'));
 
   macrosContainer.appendChild(italicButton);
 
   const strikeButton = document.createElement('button');
-  strikeButton.className = `${TOOLS_BUTTON_CLASSNAME} ${STRIKE_BUTTON_CLASSNAME}`;
+  strikeButton.id = STRIKE_BUTTON_ID;
+  strikeButton.className = TOOLS_BUTTON_CLASSNAME;
   strikeButton.innerHTML = '<del>S</del>';
   strikeButton.addEventListener('click', () => formatSelectedText('~'));
 
   macrosContainer.appendChild(strikeButton);
 
   const monospaceButton = document.createElement('button');
-  monospaceButton.className = `${TOOLS_BUTTON_CLASSNAME} ${MONOSPACE_BUTTON_CLASSNAME}`;
+  monospaceButton.id = MONOSPACE_BUTTON_ID;
+  monospaceButton.className = TOOLS_BUTTON_CLASSNAME;
   monospaceButton.innerHTML = '<code>M</code>';
   monospaceButton.addEventListener('click', () => formatSelectedText('```'));
 
