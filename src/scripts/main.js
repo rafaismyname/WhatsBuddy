@@ -8,15 +8,20 @@ const SEND_BUTTON_CHILD_SELECTOR = '#main footer button span[data-icon=send]';
 const CHAT_FOOTER_SELECTOR = '#main div[data-asset-chat-background] ~ footer';
 
 const TOOLS_CONTAINER_ID = 'whatsbuddy-tools-container';
+const TOOLS_BUTTON_CLASSNAME = 'whatsbuddy-tools-button';
 const MACROS_CONTAINER_ID = 'whatsbuddy-macros-container';
 const MACRO_BUTTON_CLASSNAME = 'whatsbuddy-macros-button';
+const BOLD_BUTTON_CLASSNAME = 'whatsbuddy-bold-button';
+const ITALIC_BUTTON_CLASSNAME = 'whatsbuddy-italic-button';
+const STRIKE_BUTTON_CLASSNAME = 'whatsbuddy-strike-button';
+const MONOSPACE_BUTTON_CLASSNAME = 'whatsbuddy-monospace-button';
 
 const chatMacros = [];
 
 const sendMessage = () => {
   setTimeout(() => {
     const sendButtonSpan = document.querySelector(SEND_BUTTON_CHILD_SELECTOR);
-    if (!sendButtonSpan) return true;
+    if (!sendButtonSpan) return false;
 
     const sendButton = sendButtonSpan.parentNode;
 
@@ -29,7 +34,7 @@ const sendMessage = () => {
 
 const insertMessageText = (text, autoSend = false) => {
   const messageInput = document.querySelector(MESSAGE_INPUT_SELECTOR);
-  if (!messageInput) return true;
+  if (!messageInput) return false;
 
   return setTimeout(() => {
     messageInput.innerHTML = text;
@@ -44,6 +49,23 @@ const insertMessageText = (text, autoSend = false) => {
   }, 0);
 };
 
+const formatSelectedText = (wrapper) => {
+  const selection = window.getSelection();
+  if (!selection.rangeCount || !selection.baseNode.data) return false;
+
+  const content = selection.baseNode.data;
+  const contentLength = selection.baseNode.length;
+  const range = selection.getRangeAt(0);
+
+  const preContent = content.substr(0, range.startOffset);
+  const replacedContent = (wrapper + selection.toString() + wrapper);
+  const postContent = content.substr(range.endOffset, contentLength);
+
+  const replacementText = (preContent + replacedContent + postContent);
+
+  return insertMessageText(replacementText);
+};
+
 onChatOpen(() => {
   const toolsContainer = document.createElement('div');
   toolsContainer.id = TOOLS_CONTAINER_ID;
@@ -53,7 +75,7 @@ onChatOpen(() => {
 
   chatMacros.forEach(({ name, message }) => {
     const macroButton = document.createElement('button');
-    macroButton.className = MACRO_BUTTON_CLASSNAME;
+    macroButton.className = `${TOOLS_BUTTON_CLASSNAME} ${MACRO_BUTTON_CLASSNAME}`;
     macroButton.innerHTML = name;
     macroButton.dataset.message = message;
 
@@ -64,6 +86,34 @@ onChatOpen(() => {
 
     macrosContainer.appendChild(macroButton);
   });
+
+  const boldButton = document.createElement('button');
+  boldButton.className = `${TOOLS_BUTTON_CLASSNAME} ${BOLD_BUTTON_CLASSNAME}`;
+  boldButton.innerHTML = '<strong>B</strong>';
+  boldButton.addEventListener('click', () => formatSelectedText('*'));
+
+  macrosContainer.appendChild(boldButton);
+
+  const italicButton = document.createElement('button');
+  italicButton.className = `${TOOLS_BUTTON_CLASSNAME} ${ITALIC_BUTTON_CLASSNAME}`;
+  italicButton.innerHTML = '<em>I</em>';
+  italicButton.addEventListener('click', () => formatSelectedText('_'));
+
+  macrosContainer.appendChild(italicButton);
+
+  const strikeButton = document.createElement('button');
+  strikeButton.className = `${TOOLS_BUTTON_CLASSNAME} ${STRIKE_BUTTON_CLASSNAME}`;
+  strikeButton.innerHTML = '<del>S</del>';
+  strikeButton.addEventListener('click', () => formatSelectedText('~'));
+
+  macrosContainer.appendChild(strikeButton);
+
+  const monospaceButton = document.createElement('button');
+  monospaceButton.className = `${TOOLS_BUTTON_CLASSNAME} ${MONOSPACE_BUTTON_CLASSNAME}`;
+  monospaceButton.innerHTML = '<code>M</code>';
+  monospaceButton.addEventListener('click', () => formatSelectedText('```'));
+
+  macrosContainer.appendChild(monospaceButton);
 
   toolsContainer.appendChild(macrosContainer);
 
