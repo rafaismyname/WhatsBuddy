@@ -91,6 +91,7 @@ onChatOpen(() => {
   boldButton.id = BOLD_BUTTON_ID;
   boldButton.className = TOOLS_BUTTON_CLASSNAME;
   boldButton.innerHTML = '<strong>B</strong>';
+  boldButton.title = 'Bold';
   boldButton.addEventListener('click', () => formatSelectedText('*'));
 
   macrosContainer.appendChild(boldButton);
@@ -99,6 +100,7 @@ onChatOpen(() => {
   italicButton.id = ITALIC_BUTTON_ID;
   italicButton.className = TOOLS_BUTTON_CLASSNAME;
   italicButton.innerHTML = '<em>I</em>';
+  italicButton.title = 'Italic';
   italicButton.addEventListener('click', () => formatSelectedText('_'));
 
   macrosContainer.appendChild(italicButton);
@@ -107,6 +109,7 @@ onChatOpen(() => {
   strikeButton.id = STRIKE_BUTTON_ID;
   strikeButton.className = TOOLS_BUTTON_CLASSNAME;
   strikeButton.innerHTML = '<del>S</del>';
+  strikeButton.title = 'Strikethrough';
   strikeButton.addEventListener('click', () => formatSelectedText('~'));
 
   macrosContainer.appendChild(strikeButton);
@@ -115,6 +118,7 @@ onChatOpen(() => {
   monospaceButton.id = MONOSPACE_BUTTON_ID;
   monospaceButton.className = TOOLS_BUTTON_CLASSNAME;
   monospaceButton.innerHTML = '<code>M</code>';
+  monospaceButton.title = 'Monospace';
   monospaceButton.addEventListener('click', () => formatSelectedText('```'));
 
   macrosContainer.appendChild(monospaceButton);
