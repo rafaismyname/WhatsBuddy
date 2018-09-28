@@ -3,23 +3,19 @@ const sync = () => {
 
   try {
     if (chrome.storage) {
-      if (chrome.storage.sync) {
-        section = chrome.storage.sync;
-      } else {
-        section = chrome.storage.local;
-      }
+      section = chrome.storage.sync || chrome.storage.local;
     }
   } catch(e) {}//eslint-disable-line
 
   try {
     if (window.storage) {
-      section = window.storage.local;
+      section = window.storage.sync || window.storage.local;
     }
   } catch(e) {}//eslint-disable-line
 
   try {
     if (browser.storage) {
-      section = browser.storage.local;
+      section = browser.storage.sync || browser.storage.local;
     }
   } catch(e) {} //eslint-disable-line
 
