@@ -19,9 +19,12 @@
   },
 
   "browser_action": {
-    "default_title": "__MSG_extName__",
-    "default_icon": "icons/icon.png",
-    "default_popup": "dist/popup.html"
+    "default_icon": "icons/icon.png"
+  },
+
+  "background": {
+    "scripts": ["dist/background.js"],
+    "persistent": false
   },
 
   "permissions": ["storage"],

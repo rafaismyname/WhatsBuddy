@@ -1,28 +1,28 @@
-const webpack = require('webpack')
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const CompressionPlugin = require('compression-webpack-plugin')
+const webpack = require('webpack'); //eslint-disable-line
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin'); //eslint-disable-line
+const ExtractTextPlugin = require('extract-text-webpack-plugin'); //eslint-disable-line
+const CompressionPlugin = require('compression-webpack-plugin'); //eslint-disable-line
 
 module.exports = {
   entry: {
     options: path.resolve(__dirname, 'src/scripts/options.js'),
-    popup: path.resolve(__dirname, 'src/scripts/popup.js'),
     main: path.resolve(__dirname, 'src/scripts/main.js'),
+    background: path.resolve(__dirname, 'src/scripts/background.js'),
   },
 
   output: {
     path: path.resolve(__dirname, 'extension/dist'),
-    filename: '[name].js'
+    filename: '[name].js',
   },
 
   resolve: {
-    extensions: [ '.js', '.json', '.scss', '.css' ],
+    extensions: ['.js', '.json', '.scss', '.css'],
     alias: {
       utils: path.resolve(__dirname, 'src/scripts/utils'),
       images: path.resolve(__dirname, 'src/images'),
-      styles: path.resolve(__dirname, 'src/styles')
-    }
+      styles: path.resolve(__dirname, 'src/styles'),
+    },
   },
 
   module: {
@@ -30,34 +30,30 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
+        exclude: /node_modules/,
       },
       {
         test: /\.html$/,
-        loaders: [ 'html-loader' ]
+        loaders: ['html-loader'],
       },
       {
         test: /\.(scss|css)$/,
-        use: ExtractTextPlugin.extract(
-          {
-            fallback: 'style-loader',
-            use: [ 'css-loader', 'sass-loader' ]
-          }
-        )
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader'],
+        }),
       },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
         loader: 'url-loader',
-        options: {
-          limit: 10000
-        }
-      }
-    ]
+        options: { limit: 10000 },
+      },
+    ],
   },
 
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
 
     new HtmlWebpackPlugin({
@@ -65,34 +61,24 @@ module.exports = {
       filename: 'options.html',
       chunks: ['options'],
       inject: true,
-      minify: {}
+      minify: {},
     }),
 
-    new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, 'src/views/popup.html'),
-      filename: 'popup.html',
-      chunks: ['popup'],
-      inject: true,
-      minify: {}
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: { warnings: false },
+      comments: false,
     }),
-
-    new webpack.optimize.UglifyJsPlugin(
-      {
-        sourceMap: true,
-        compress: { warnings: false },
-        comments: false
-      }
-    ),
 
     new ExtractTextPlugin('[name].css'),
 
     new CompressionPlugin({
-      test: /\.js$|\.css$|\.html$/
+      test: /\.js$|\.css$|\.html$/,
     }),
 
     new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin()
+    new webpack.optimize.OccurrenceOrderPlugin(),
   ],
 
-  devtool: 'cheap-module-source-map'
-}
+  devtool: 'cheap-module-source-map',
+};
