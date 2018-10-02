@@ -1,8 +1,6 @@
 import * as storage from '../helpers/storage';
 import { onDocumentReady, onChatOpen } from '../helpers/events';
 
-import './main.scss';
-
 const MESSAGE_INPUT_SELECTOR = '#main footer div[contenteditable]';
 const SEND_BUTTON_CHILD_SELECTOR = '#main footer button span[data-icon=send]';
 const CHAT_FOOTER_SELECTOR = '#main div[data-asset-chat-background] ~ footer';
@@ -51,10 +49,10 @@ const insertMessageText = (text, autoSend = false) => {
 
 const formatSelectedText = (wrapper) => {
   const selection = window.getSelection();
-  if (!selection.rangeCount || !selection.baseNode.data) return false;
+  if (!selection.rangeCount || !selection.anchorNode.data) return false;
 
-  const content = selection.baseNode.data;
-  const contentLength = selection.baseNode.length;
+  const content = selection.anchorNode.data;
+  const contentLength = selection.anchorNode.length;
   const range = selection.getRangeAt(0);
 
   const preContent = content.substr(0, range.startOffset);

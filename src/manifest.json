@@ -7,34 +7,31 @@
   "default_locale": "en",
 
   "icons": {
-    "128": "icons/icon.png"
+    "128": "./icons/icon.png"
   },
 
   "browser_action": {
-    "default_icon": "icons/icon.png"
+    "default_icon": "./icons/icon.png"
   },
 
   "background": {
-    "scripts": ["background/background.js"],
+    "scripts": ["./background/background.js"],
     "persistent": false
   },
 
   "options_ui": {
-    "page": "options/options.html",
+    "page": "./options/options.html",
     "chrome_style": false,
-    "browser_style": false,
     "open_in_tab": true
   },
 
   "content_scripts": [
     {
       "matches": ["https://web.whatsapp.com/*"],
-      "js": ["main/main.js"],
-      "css" : ["main/main.scss"]
+      "js": ["./chat/chat.js"],
+      "css" : ["./chat/chat.scss"]
     }
   ],
 
-  "permissions": ["storage"],
-
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self';"
+  "permissions": ["storage"]
 }

@@ -20,7 +20,8 @@
     "firefox-addon"
   ],
   "scripts": {
-    "start": "NODE_ENV=development parcel src/manifest.json"
+    "start": "NODE_ENV=development parcel src/manifest.json --no-hmr --no-cache",
+    "build": "parcel build src/manifest.json"
   },
   "devDependencies": {
     "eslint": "^4.13.1",
