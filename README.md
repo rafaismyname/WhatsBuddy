@@ -36,7 +36,7 @@ See also the list of [contributors](https://github.com/rafaismyname/whatsbuddy/c
 
 ## License
 
-This project is licensed under the MIT License - see the  [LICENSE](https://github.com/rafaismyname/whatsbuddy/blob/master/LICENSE)  file for details
+This project is licensed under the MIT License - see the  [LICENSE.md](https://github.com/rafaismyname/whatsbuddy/blob/master/LICENSE.md)  file for details
 
 ## Versioning
 
