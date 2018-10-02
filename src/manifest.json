@@ -3,7 +3,7 @@
 
   "name": "WhatsBuddy",
   "description": "WebExtension that adds extra functionalities to WhatsApp Web",
-  "version": "1.0",
+  "version": "0.1.0",
 
   "icons": {
     "128": "./icons/icon.png"

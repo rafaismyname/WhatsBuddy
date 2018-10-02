@@ -1,6 +1,6 @@
 {
   "name": "whatsbuddy",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "WebExtension that adds extra functionalities to WhatsApp Web",
   "license": "MIT",
   "bugs": {
