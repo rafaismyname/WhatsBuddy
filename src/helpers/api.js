@@ -27,6 +27,6 @@ const api = (method) => {
   return false;
 };
 
-export const tabs = api('tabs');
+export const runtime = api('runtime');
 export const browserAction = api('browserAction');
 export const extension = api('extension');

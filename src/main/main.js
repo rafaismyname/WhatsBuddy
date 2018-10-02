@@ -1,7 +1,7 @@
-import * as storage from './utils/storage';
-import { onDocumentReady, onChatOpen } from './utils/events';
+import * as storage from '../helpers/storage';
+import { onDocumentReady, onChatOpen } from '../helpers/events';
 
-import '../styles/main.scss';
+import './main.scss';
 
 const MESSAGE_INPUT_SELECTOR = '#main footer div[contenteditable]';
 const SEND_BUTTON_CHILD_SELECTOR = '#main footer button span[data-icon=send]';

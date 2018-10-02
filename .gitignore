@@ -6,7 +6,8 @@ npm-debug.log*
 
 *.log
 
-extension/dist/
+dist/
+.cache
 
 .tmp
 

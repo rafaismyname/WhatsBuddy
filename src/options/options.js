@@ -1,7 +1,5 @@
-import * as storage from './utils/storage';
-import { onDocumentReady, onClick } from './utils/events';
-
-import '../styles/options.scss';
+import * as storage from '../helpers/storage';
+import { onDocumentReady, onClick } from '../helpers/events';
 
 const MACROS_CONTAINER_SELECTOR = '#whatsbuddy-options-macros';
 const ADD_MACRO_BUTTON_SELECTOR = '#whatsbuddy-options-add-macro';
