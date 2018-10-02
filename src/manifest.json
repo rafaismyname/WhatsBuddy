@@ -6,11 +6,23 @@
   "version": "0.1.0",
 
   "icons": {
-    "128": "./icons/icon.png"
+    "512": "./icons/icon.png",
+    "256": "./icons/icon-256.png",
+    "128": "./icons/icon-128.png",
+    "64": "./icons/icon-64.png",
+    "48": "./icons/icon-48.png",
+    "32": "./icons/icon-32.png"
   },
 
   "browser_action": {
-    "default_icon": "./icons/icon.png"
+    "default_icon": {
+      "512": "./icons/icon.png",
+      "256": "./icons/icon-256.png",
+      "128": "./icons/icon-128.png",
+      "64": "./icons/icon-64.png",
+      "48": "./icons/icon-48.png",
+      "32": "./icons/icon-32.png"
+    }
   },
 
   "background": {
