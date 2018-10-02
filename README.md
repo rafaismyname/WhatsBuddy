@@ -6,6 +6,11 @@ Message Macros: Add quick message macros for a faster response!
 
 WYSI**N**WYG: Enables an utility bar on top of your compose message's bar allowing you to easily format your text.
 
+## Installing
+
+[WhatsBuddy @ Chrome Web Store](https://chrome.google.com/webstore/detail/whatsbuddy/ejliopghaapgmlgabgchokefmlfbaikh)
+[WhatsBuddy @ Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/whatsbuddy/)
+
 ## Development setup
 
 After cloning this repo, starting development environment is as easy as:
