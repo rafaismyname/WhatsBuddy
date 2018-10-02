@@ -19,7 +19,7 @@ After that, a `dist` folder will be created with extension's content. And also w
 
 To generate a production build just run: `yarn run build`
 
-Just make sure to follow (Airbnb's JS Style Guidelines)[https://github.com/airbnb/javascript] ok?
+Just make sure to follow [Airbnb's JS Style Guidelines](https://github.com/airbnb/javascript) ok?
 
 ## Release History
 
