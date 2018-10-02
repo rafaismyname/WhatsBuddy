@@ -1,10 +1,9 @@
 {
   "manifest_version": 2,
 
-  "name": "__MSG_extName__",
-  "description": "__MSG_extDesc__",
+  "name": "WhatsBuddy",
+  "description": "WebExtension that adds extra functionalities to WhatsApp Web",
   "version": "1.0",
-  "default_locale": "en",
 
   "icons": {
     "128": "./icons/icon.png"

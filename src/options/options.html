@@ -1,26 +1,63 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
     <title>WhatsBuddy Options</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+
     <link rel="stylesheet" href="./options.scss" />
   </head>
   <body>
-    <main>
-      <table>
-        <thead>
-          <th>Name</th>
-          <th>Messages</th>
-          <th>&nbsp;</th>
-        </thead>
-        <tbody id="whatsbuddy-options-macros">
-        </tbody>
-      </table>
-      <button id="whatsbuddy-options-add-macro">+ Macro</button>
+    <header class="container">
+      <section class="columns text-center mt-2">
+        <div class="column col-12">
+          <h4>WhatsBuddy</h4>
+        </div>
+      </section>
+    </header>
+
+    <main class="container">
+      <section class="columns">
+        <div class="column col-6 col-xs-12 col-mx-auto">
+          <div class="panel">
+            <div class="panel-header">
+              <div class="columns">
+                <div class="column col-8">
+                  <h4>Message Macros</h4>
+                </div>
+                <div class="column col-4 text-right">
+                  <button class="btn btn-sm" id="whatsbuddy-options-add-macro">
+                    <i class="icon icon-plus"></i> Macro
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div class="columns">
+                <div class="column col-12" id="whatsbuddy-options-success">
+                </div>
+                <div class="column col-12">
+                  <table class="table table-striped table-hover">
+                    <thead>
+                      <th>Macro Name</th>
+                      <th>Message</th>
+                      <th>&nbsp;</th>
+                    </thead>
+                    <tbody id="whatsbuddy-options-macros">
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="panel-footer">
+              <button class="btn btn-block btn-success" id="whatsbuddy-options-save">
+                <i class="icon icon-check"></i> Save options
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
-    <footer>
-      <button id="whatsbuddy-options-save">Save options</button>
-    </footer>
 
     <script type="application/javascript" src="./options.js"></script>
   </body>

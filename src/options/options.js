@@ -4,10 +4,13 @@ import { onDocumentReady, onClick } from '../helpers/events';
 const MACROS_CONTAINER_SELECTOR = '#whatsbuddy-options-macros';
 const ADD_MACRO_BUTTON_SELECTOR = '#whatsbuddy-options-add-macro';
 const MACRO_CONTAINER_CLASSNAME = 'whatsbuddy-options-macro';
-const MACRO_NAME_INPUT_CLASSNAME = 'whatsbuddy-options-macro-name';
-const MACRO_MESSAGE_INPUT_CLASSNAME = 'whatsbuddy-options-macro-message';
-const MACRO_DELETE_BUTTON_CLASSNAME = 'whatsbuddy-options-macro-delete';
-const OPTIONS_SUCCESS_POPUP_CLASSNAME = 'whatsbuddy-options-success';
+const MACRO_NAME_INPUT_CLASSNAME = 'whatsbuddy-options-macro-name form-input input-lg';
+const MACRO_NAME_INPUT_SELECTOR = 'input.whatsbuddy-options-macro-name';
+const MACRO_MESSAGE_INPUT_CLASSNAME = 'whatsbuddy-options-macro-message form-input input-lg';
+const MACRO_MESSAGE_INPUT_SELECTOR = 'input.whatsbuddy-options-macro-message';
+const MACRO_DELETE_BUTTON_CLASSNAME = 'whatsbuddy-options-macro-delete btn btn-error';
+const OPTIONS_SUCCESS_POPUP_SELECTOR = '#whatsbuddy-options-success';
+const OPTIONS_SUCCESS_POPUP_CLASSNAME = 'whatsbuddy-options-success toast toast-success text-center';
 const OPTIONS_SAVE_BUTTON_SELECTOR = '#whatsbuddy-options-save';
 
 const insertMacro = (name = null, message = null) => {
@@ -39,7 +42,7 @@ const insertMacro = (name = null, message = null) => {
   const macroDeleteContainer = document.createElement('td');
   const macroDeleteButton = document.createElement('button');
   macroDeleteButton.className = MACRO_DELETE_BUTTON_CLASSNAME;
-  macroDeleteButton.innerHTML = '- Remove';
+  macroDeleteButton.innerHTML = '<i class="icon icon-cross"></i>';
   onClick(macroDeleteButton, () => {
     macrosContainer.removeChild(macroContainer);
   });
@@ -54,10 +57,10 @@ const serializeMacros = () => {
   const macrosContainers = document.querySelectorAll(`${MACROS_CONTAINER_SELECTOR} .${MACRO_CONTAINER_CLASSNAME}`);
 
   const rawMacros = ([...macrosContainers]).map((macroContainer) => {
-    const macroNameInput = macroContainer.querySelector(`input.${MACRO_NAME_INPUT_CLASSNAME}`);
+    const macroNameInput = macroContainer.querySelector(MACRO_NAME_INPUT_SELECTOR);
     const name = macroNameInput.value;
 
-    const macroMessageInput = macroContainer.querySelector(`input.${MACRO_MESSAGE_INPUT_CLASSNAME}`);
+    const macroMessageInput = macroContainer.querySelector(MACRO_MESSAGE_INPUT_SELECTOR);
     const message = macroMessageInput.value;
 
     return { name, message };
@@ -79,7 +82,7 @@ const serializeOptions = () => {
 };
 
 const successPopup = () => {
-  const footer = document.querySelector('footer');
+  const footer = document.querySelector(OPTIONS_SUCCESS_POPUP_SELECTOR);
 
   const previousMessage = footer.getElementsByClassName(OPTIONS_SUCCESS_POPUP_CLASSNAME);
   if (previousMessage && previousMessage[0]) {
