@@ -39,7 +39,7 @@
   "content_scripts": [
     {
       "matches": ["https://web.whatsapp.com/*"],
-      "js": ["./chat/chat.js"],
+      "js": ["./chat/chat.js", "./list/list.js"],
       "css" : ["./chat/chat.scss"]
     }
   ],
