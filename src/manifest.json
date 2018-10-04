@@ -40,7 +40,7 @@
     {
       "matches": ["https://web.whatsapp.com/*"],
       "js": ["./chat/chat.js", "./list/list.js"],
-      "css" : ["./chat/chat.scss"]
+      "css" : ["./chat/chat.scss", "./list/list.scss"]
     }
   ],
 
