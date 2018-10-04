@@ -11,14 +11,34 @@ let contacts = {};
 
 const hideList = [];
 
-const buildOverlay = () => {
+const clearOverlay = () => {
   contactsList.style.display = 'none';
 
   while (contactsOverlay.firstChild) {
     contactsOverlay.removeChild(contactsOverlay.firstChild);
   }
+};
 
-  Object.keys(contacts).forEach((contactName) => {
+const getSortedContactsNames = () => (
+  Object.keys(contacts).sort((a, b) => {
+    const getPriority = (contactName) => {
+      const contact = contacts[contactName];
+      const transformVal = contact.style.transform;
+      const transformMatch = transformVal.match(/translateY\((\w*)px\)/i);
+      const rawPriority = (transformMatch && transformMatch[1]) || 999999;
+      return parseInt(rawPriority, 10);
+    };
+
+    return getPriority(a) - getPriority(b);
+  })
+);
+
+const buildOverlay = () => {
+  clearOverlay();
+
+  const sortedContactNames = getSortedContactsNames();
+
+  sortedContactNames.forEach((contactName) => {
     const contact = contacts[contactName];
 
     contact.classList.add(OVERLAY_CONTACT_CLASSNAME);
@@ -33,9 +53,14 @@ const buildOverlay = () => {
 };
 
 const processList = () => {
-  ([...contactsList.children]).forEach((contact) => {
+  const listContacts = [...contactsList.children];
+  (listContacts).forEach((contact) => {
     const text = contact.innerText.trim();
     const name = text.split('\n')[0];
+
+    const styleObserver = new MutationObserver(() => processList());
+    styleObserver.observe(contact, { attributes: true, attributeFilter: ['style'] });
+
     contacts = Object.assign({}, contacts, { [name]: contact });
   });
 
