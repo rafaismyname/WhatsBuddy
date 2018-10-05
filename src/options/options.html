@@ -11,13 +11,16 @@
     <header class="container">
       <section class="columns text-center mt-2">
         <div class="column col-12">
-          <h4>WhatsBuddy</h4>
+          <h2>WhatsBuddy</h2>
         </div>
       </section>
     </header>
 
     <main class="container">
       <section class="columns">
+        <div class="column col-12 mb-2" id="whatsbuddy-options-success">
+        </div>
+
         <div class="column col-6 col-xs-12 col-mx-auto">
           <div class="panel">
             <div class="panel-header">
@@ -33,28 +36,60 @@
               </div>
             </div>
             <div class="panel-body">
-              <div class="columns">
-                <div class="column col-12" id="whatsbuddy-options-success">
-                </div>
-                <div class="column col-12">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <th>Macro Name</th>
+                  <th>Message</th>
+                  <th>&nbsp;</th>
+                </thead>
+                <tbody id="whatsbuddy-options-macros">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="column col-6 col-xs-12 col-mx-auto">
+          <div class="panel">
+            <div class="panel-header">
+              <h4>Hide List</h4>
+            </div>
+            <div class="panel-body">
+              <div class="columns col-gapless">
+                <div class="column col-6">
+                  <h5 class="text-center">Visible Contacts</h5>
+
                   <table class="table table-striped table-hover">
                     <thead>
-                      <th>Macro Name</th>
-                      <th>Message</th>
-                      <th>&nbsp;</th>
+                      <th>Contact</th>
+                      <th>Hide</th>
                     </thead>
-                    <tbody id="whatsbuddy-options-macros">
+                    <tbody id="whatsbuddy-visible-contacts">
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="column col-6">
+                  <h5 class="text-center">Hidden Contacts</h5>
+
+                  <table class="table table-striped table-hover">
+                    <thead>
+                      <th>Show</th>
+                      <th class="text-right">Contact</th>
+                    </thead>
+                    <tbody id="whatsbuddy-hidden-contacts">
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
-            <div class="panel-footer">
-              <button class="btn btn-block btn-success" id="whatsbuddy-options-save">
-                <i class="icon icon-check"></i> Save options
-              </button>
-            </div>
           </div>
+        </div>
+
+        <div class="column col-12 mt-2">
+          <button class="btn btn-block btn-success" id="whatsbuddy-options-save">
+            <i class="icon icon-check"></i> Save options
+          </button>
         </div>
       </section>
     </main>

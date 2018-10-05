@@ -1,3 +1,5 @@
+import * as storage from '../helpers/storage';
+
 const SIDE_PANE_SELECTOR = '#pane-side';
 const SIDE_PANE_LIST_SELECTOR = 'div:first-child > div:first-child > div:first-child';
 const CONTACTS_OVERLAY_ID = 'whatsbuddy-contacts-overlay';
@@ -9,7 +11,7 @@ let contactsList = null;
 let contactsOverlay = null;
 let contacts = {};
 
-const hideList = [];
+let hideList = [];
 
 const clearOverlay = () => {
   contactsList.style.display = 'none';
@@ -45,7 +47,6 @@ const buildOverlay = () => {
 
     if (hideList.includes(contactName)) {
       contact.classList.add(OVERLAY_HIDDEN_CONTACT_CLASSNAME);
-      return;
     }
 
     contactsOverlay.appendChild(contact);
@@ -63,6 +64,8 @@ const processList = () => {
 
     contacts = Object.assign({}, contacts, { [name]: contact });
   });
+
+  storage.save({ contacts: Object.keys(contacts) });
 
   buildOverlay();
 };
@@ -85,11 +88,16 @@ const mainObserver = new MutationObserver((mutations) => {
 
         sidePane.insertBefore(contactsOverlay, sidePane.firstChild);
 
-        processList();
+        const storageParams = { hiddenContacts: [] };
+        storage.get(storageParams).then(({ hiddenContacts }) => {
+          hideList = hiddenContacts;
+
+          processList();
+
+          listObserver.observe(contactsList, { childList: true, subtree: true });
+        });
 
         window.addEventListener('error', () => document.location.reload());
-
-        listObserver.observe(contactsList, { childList: true, subtree: true });
       }
     });
   });
