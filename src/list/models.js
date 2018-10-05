@@ -6,6 +6,11 @@ const OVERLAY_CHAT_CLASSNAME = 'whatsbuddy-overlay-chat';
 const OVERLAY_HIDDEN_CHAT_CLASSNAME = 'whatsbuddy-overlay-hidden-chat';
 const CHAT_NAME_SELECTOR = 'span[dir="auto"][title][class]';
 const CHAT_NAME_ATTRIBUTE = 'title';
+const CHAT_TYPE_SELECTOR = 'span[data-icon^="default-"]';
+const CHAT_TYPE_ATTRIBUTE = 'data-icon';
+const CHAT_TYPE_PREFIX = 'default-';
+const CHAT_IMAGE_SELECTOR = 'img[src^="https://dyn.web"]';
+const CHAT_IMAGE_UID_URL_PARAM = 'u';
 
 export class Chat {
   constructor(element) {
@@ -13,6 +18,7 @@ export class Chat {
 
     this.id = null;
     this.name = null;
+    this.type = null;
 
     this.styleObserver = null;
 
@@ -22,7 +28,15 @@ export class Chat {
   build() {
     const nameElement = this.element.querySelector(CHAT_NAME_SELECTOR);
     this.name = nameElement.getAttribute(CHAT_NAME_ATTRIBUTE);
-    this.id = this.name; // TODO: implement id
+
+    const typeElement = this.element.querySelector(CHAT_TYPE_SELECTOR);
+    this.type = typeElement.getAttribute(CHAT_TYPE_ATTRIBUTE).replace(CHAT_TYPE_PREFIX, '');
+
+    const imgElement = this.element.querySelector(CHAT_IMAGE_SELECTOR);
+    const imgUrl = imgElement && imgElement.getAttribute('src');
+    const uid = imgUrl && new URLSearchParams(imgUrl).get(CHAT_IMAGE_UID_URL_PARAM);
+
+    this.id = uid || this.name;
 
     return this;
   }
@@ -34,6 +48,14 @@ export class Chat {
   initStyleObserver() {
     const observerOptions = { attributes: true, attributeFilter: ['style'] };
     this.styleObserver.observe(this.element, observerOptions);
+  }
+
+  toObject() {
+    return {
+      id: this.id,
+      type: this.type,
+      name: this.name,
+    };
   }
 }
 
@@ -95,10 +117,9 @@ export class BaseList {
   }
 
   persistChats() {
-    const chats = Object.keys(this.chats).map((chatId) => {
-      const chat = this.chats[chatId];
-      return { id: chatId, name: chat.name };
-    });
+    const chats = Object
+      .keys(this.chats)
+      .map(chatId => this.chats[chatId].toObject());
 
     return storage.save({ chats });
   }

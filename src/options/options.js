@@ -59,13 +59,14 @@ const renderMacros = (macros) => {
   macros.forEach(({ name, message }) => insertMacro(name, message));
 };
 
-const insertChat = (chatName) => {
+const insertChat = (chat, chats) => {
   const chatsContainer = document.querySelector(CHATS_CONTAINER_SELECTOR);
 
   const chatContainer = document.createElement('tr');
 
   const nameContainer = document.createElement('td');
-  nameContainer.innerHTML = chatName;
+  nameContainer.innerHTML = chat.name;
+  nameContainer.dataset.chatId = chat.id;
 
   chatContainer.appendChild(nameContainer);
 
@@ -75,7 +76,7 @@ const insertChat = (chatName) => {
   hideButton.className = 'btn btn-error';
   onClick(hideButton, () => {
     chatsContainer.removeChild(chatContainer);
-    insertHiddenChat(chatName); // eslint-disable-line
+    insertHiddenChat(chat, chats); // eslint-disable-line
   });
   hideContainer.appendChild(hideButton);
 
@@ -84,7 +85,7 @@ const insertChat = (chatName) => {
   chatsContainer.appendChild(chatContainer);
 };
 
-const insertHiddenChat = (chatName) => {
+const insertHiddenChat = (chat, chats) => {
   const chatsContainer = document.querySelector(HIDDEN_CHATS_CONTAINER_SELECTOR);
 
   const chatContainer = document.createElement('tr');
@@ -95,7 +96,7 @@ const insertHiddenChat = (chatName) => {
   showButton.className = 'btn btn-success';
   onClick(showButton, () => {
     chatsContainer.removeChild(chatContainer);
-    insertChat(chatName);
+    insertChat(chat, chats);
   });
   showContainer.appendChild(showButton);
 
@@ -103,7 +104,8 @@ const insertHiddenChat = (chatName) => {
 
   const nameContainer = document.createElement('td');
   nameContainer.className = 'text-right';
-  nameContainer.innerHTML = chatName;
+  nameContainer.innerHTML = chat.name || chat.id;
+  nameContainer.dataset.chatId = chat.id;
 
   chatContainer.appendChild(nameContainer);
 
@@ -111,12 +113,13 @@ const insertHiddenChat = (chatName) => {
 };
 
 const renderChats = (chats, hiddenChats) => {
-  const chatNames = chats.map(chat => chat.name);
+  const filteredChats = chats.filter(chat => !hiddenChats.includes(chat.id));
+  filteredChats.forEach(chat => insertChat(chat, chats));
 
-  const filteredChats = chatNames.filter(chatName => !hiddenChats.includes(chatName));
-  filteredChats.forEach(insertChat);
-
-  hiddenChats.forEach(insertHiddenChat);
+  hiddenChats.forEach((chatId) => {
+    const chat = chats.find(c => c.id === chatId) || { id: chatId };
+    insertHiddenChat(chat, chats);
+  });
 };
 
 const serializeMacros = () => {
@@ -145,7 +148,7 @@ const serializeHiddenChats = () => {
   const chatsContainer = document.querySelector(HIDDEN_CHATS_CONTAINER_SELECTOR);
   const hiddenList = chatsContainer.querySelectorAll('tr td:last-child');
 
-  return ([...hiddenList]).map(node => node.innerText);
+  return ([...hiddenList]).map(node => node.dataset.chatId);
 };
 
 const serializeOptions = () => {
