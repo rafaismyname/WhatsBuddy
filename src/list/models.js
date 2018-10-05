@@ -4,26 +4,36 @@ const BASE_LIST_SELECTOR = 'div:first-child > div:first-child > div:first-child'
 const OVERLAY_LIST_ID = 'whatsbuddy-overlay-list';
 const OVERLAY_CHAT_CLASSNAME = 'whatsbuddy-overlay-chat';
 const OVERLAY_HIDDEN_CHAT_CLASSNAME = 'whatsbuddy-overlay-hidden-chat';
+const CHAT_NAME_SELECTOR = 'span[dir="auto"][title][class]';
+const CHAT_NAME_ATTRIBUTE = 'title';
 
 export class Chat {
-  constructor() {
-    this.id = null;
-    this.name = null;
-    this.element = null;
-    this.styleObserver = null;
-  }
-
-  build(element, styleUpdateCallback) {
+  constructor(element) {
     this.element = element;
 
-    const chatText = this.element.innerText.trim();
-    this.name = (chatText.split('\n')[0]).trim();
+    this.id = null;
+    this.name = null;
+
+    this.styleObserver = null;
+
+    this.build();
+  }
+
+  build() {
+    const nameElement = this.element.querySelector(CHAT_NAME_SELECTOR);
+    this.name = nameElement.getAttribute(CHAT_NAME_ATTRIBUTE);
     this.id = this.name; // TODO: implement id
 
-    this.styleObserver = new MutationObserver(() => styleUpdateCallback());
-    this.styleObserver.observe(this.element, { attributes: true, attributeFilter: ['style'] });
-
     return this;
+  }
+
+  setStyleObserver(callback) {
+    this.styleObserver = new MutationObserver(() => callback());
+  }
+
+  initStyleObserver() {
+    const observerOptions = { attributes: true, attributeFilter: ['style'] };
+    this.styleObserver.observe(this.element, observerOptions);
   }
 }
 
@@ -59,13 +69,16 @@ export class BaseList {
 
   fetchChats() {
     const chatsElements = [...this.element.children];
-    (chatsElements).forEach((chatElement) => {
-      const chat = (new Chat()).build(chatElement, this.process);
+    this.chats = chatsElements.reduce((acc, chatElement) => {
+      const chat = new Chat(chatElement);
 
-      this.chats = Object.assign({}, this.chats, { [chat.id]: chat });
-    });
+      chat.setStyleObserver(() => this.process());
 
-    this.sortedChatIds = Object.keys(this.chats).sort((a, b) => {
+      return Object.assign({}, acc, { [chat.id]: chat });
+    }, this.chats);
+
+    const chatIds = Object.keys(this.chats);
+    this.sortedChatIds = chatIds.sort((a, b) => {
       const getPriority = (chatId) => {
         const chat = this.chats[chatId];
         const chatElement = chat.element;
@@ -153,6 +166,8 @@ export class OverlayList {
     this.baseList.sortedChatIds.forEach((chatId) => {
       const chat = this.baseList.chats[chatId];
       if (!chat) return;
+
+      chat.initStyleObserver();
 
       this.appendChat(chat);
     });

@@ -6,6 +6,7 @@ const overlayList = new OverlayList();
 
 onSidePaneLoaded((sidePane) => {
   baseList.build(sidePane, overlayList);
+
   overlayList.build(sidePane, baseList);
   overlayList.init();
 
