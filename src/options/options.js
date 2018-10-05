@@ -12,6 +12,8 @@ const MACRO_DELETE_BUTTON_CLASSNAME = 'whatsbuddy-options-macro-delete btn btn-e
 const OPTIONS_SUCCESS_POPUP_SELECTOR = '#whatsbuddy-options-success';
 const OPTIONS_SUCCESS_POPUP_CLASSNAME = 'whatsbuddy-options-success toast toast-success text-center';
 const OPTIONS_SAVE_BUTTON_SELECTOR = '#whatsbuddy-options-save';
+const CHATS_CONTAINER_SELECTOR = '#whatsbuddy-chats';
+const HIDDEN_CHATS_CONTAINER_SELECTOR = '#whatsbuddy-hidden-chats';
 
 const insertMacro = (name = null, message = null) => {
   const macrosContainer = document.querySelector(MACROS_CONTAINER_SELECTOR);
@@ -53,6 +55,73 @@ const insertMacro = (name = null, message = null) => {
   macrosContainer.appendChild(macroContainer);
 };
 
+const renderMacros = (macros) => {
+  macros.forEach(({ name, message }) => insertMacro(name, message));
+};
+
+const insertChat = (chat, chats) => {
+  const chatsContainer = document.querySelector(CHATS_CONTAINER_SELECTOR);
+
+  const chatContainer = document.createElement('tr');
+
+  const nameContainer = document.createElement('td');
+  nameContainer.innerHTML = chat.name;
+  nameContainer.dataset.chatId = chat.id;
+
+  chatContainer.appendChild(nameContainer);
+
+  const hideContainer = document.createElement('td');
+  const hideButton = document.createElement('button');
+  hideButton.innerHTML = '<i class="icon icon-arrow-right"></i>';
+  hideButton.className = 'btn btn-error';
+  onClick(hideButton, () => {
+    chatsContainer.removeChild(chatContainer);
+    insertHiddenChat(chat, chats); // eslint-disable-line
+  });
+  hideContainer.appendChild(hideButton);
+
+  chatContainer.appendChild(hideContainer);
+
+  chatsContainer.appendChild(chatContainer);
+};
+
+const insertHiddenChat = (chat, chats) => {
+  const chatsContainer = document.querySelector(HIDDEN_CHATS_CONTAINER_SELECTOR);
+
+  const chatContainer = document.createElement('tr');
+
+  const showContainer = document.createElement('td');
+  const showButton = document.createElement('button');
+  showButton.innerHTML = '<i class="icon icon-arrow-left"></i>';
+  showButton.className = 'btn btn-success';
+  onClick(showButton, () => {
+    chatsContainer.removeChild(chatContainer);
+    insertChat(chat, chats);
+  });
+  showContainer.appendChild(showButton);
+
+  chatContainer.appendChild(showContainer);
+
+  const nameContainer = document.createElement('td');
+  nameContainer.className = 'text-right';
+  nameContainer.innerHTML = chat.name || chat.id;
+  nameContainer.dataset.chatId = chat.id;
+
+  chatContainer.appendChild(nameContainer);
+
+  chatsContainer.appendChild(chatContainer);
+};
+
+const renderChats = (chats, hiddenChats) => {
+  const filteredChats = chats.filter(chat => !hiddenChats.includes(chat.id));
+  filteredChats.forEach(chat => insertChat(chat, chats));
+
+  hiddenChats.forEach((chatId) => {
+    const chat = chats.find(c => c.id === chatId) || { id: chatId };
+    insertHiddenChat(chat, chats);
+  });
+};
+
 const serializeMacros = () => {
   const macrosContainers = document.querySelectorAll(`${MACROS_CONTAINER_SELECTOR} .${MACRO_CONTAINER_CLASSNAME}`);
 
@@ -75,10 +144,18 @@ const serializeMacros = () => {
   return macros;
 };
 
+const serializeHiddenChats = () => {
+  const chatsContainer = document.querySelector(HIDDEN_CHATS_CONTAINER_SELECTOR);
+  const hiddenList = chatsContainer.querySelectorAll('tr td:last-child');
+
+  return ([...hiddenList]).map(node => node.dataset.chatId);
+};
+
 const serializeOptions = () => {
   const macros = serializeMacros();
+  const hiddenChats = serializeHiddenChats();
 
-  return { macros };
+  return { macros, hiddenChats };
 };
 
 const successPopup = () => {
@@ -98,21 +175,20 @@ const successPopup = () => {
   footer.appendChild(successMessage);
 };
 
-const renderOptions = ({ macros }) => {
-  macros.forEach(({ name, message }) => insertMacro(name, message));
-};
-
-onClick(ADD_MACRO_BUTTON_SELECTOR, () => {
-  insertMacro();
-});
-
-onClick(OPTIONS_SAVE_BUTTON_SELECTOR, () => {
+const saveOptions = () => {
   const options = serializeOptions();
 
   storage.save(options).then(() => successPopup());
-});
+};
+
+onClick(ADD_MACRO_BUTTON_SELECTOR, () => insertMacro());
+
+onClick(OPTIONS_SAVE_BUTTON_SELECTOR, () => saveOptions());
 
 onDocumentReady(() => {
-  const storageParams = { macros: [] };
-  storage.get(storageParams).then(renderOptions);
+  const storageParams = { macros: [], chats: [], hiddenChats: [] };
+  storage.get(storageParams).then(({ macros, chats, hiddenChats }) => {
+    renderMacros(macros);
+    renderChats(chats, hiddenChats);
+  });
 });

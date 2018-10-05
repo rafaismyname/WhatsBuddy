@@ -3,7 +3,7 @@
 
   "name": "WhatsBuddy",
   "description": "WebExtension that adds extra functionalities to WhatsApp Web",
-  "version": "0.1.0",
+  "version": "0.2.0",
 
   "icons": {
     "512": "./icons/icon.png",
@@ -39,8 +39,8 @@
   "content_scripts": [
     {
       "matches": ["https://web.whatsapp.com/*"],
-      "js": ["./chat/chat.js"],
-      "css" : ["./chat/chat.scss"]
+      "js": ["./chat/chat.js", "./list/list.js"],
+      "css" : ["./chat/chat.scss", "./list/list.scss"]
     }
   ],
 
