@@ -74,11 +74,11 @@ const insertMacro = (name = null, message = null) => {
   macrosContainer.appendChild(macroContainer);
 };
 
-export const renderMacros = () => {
+const renderMacros = () => {
   state.macros.forEach(({ name, message }) => insertMacro(name, message));
 };
 
-export const serializeMacros = () => {
+const serializeMacros = () => {
   const macrosContainers = document.querySelectorAll(`${MACROS_CONTAINER_SELECTOR} .${MACRO_CONTAINER_CLASSNAME}`);
 
   const rawMacros = ([...macrosContainers]).map((macroContainer) => {
@@ -118,3 +118,5 @@ onDocumentReady(() => {
     .then(() => renderEnableSwitch())
     .then(() => renderMacros());
 });
+
+export default {};

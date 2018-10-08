@@ -1,8 +1,33 @@
 import * as storage from '../../helpers/storage';
-import { onDocumentReady, onClick } from '../../helpers/events';
+import { onDocumentReady, onClick, onChange } from '../../helpers/events';
 
+const HIDE_CHAT_SWITCH_SELECTOR = 'input#whatsbuddy-hide-chat-enabled';
+const HIDE_CHAT_STATUS_SELECTOR = 'span#whatsbuddy-hide-chat-status';
 const CHATS_CONTAINER_SELECTOR = '#whatsbuddy-chats';
 const HIDDEN_CHATS_CONTAINER_SELECTOR = '#whatsbuddy-hidden-chats';
+
+let state = {
+  chats: [],
+  enableHideChats: true,
+  hiddenChats: [],
+};
+
+const renderHideChatEnableSwitch = () => {
+  const enableSwitch = document.querySelector(HIDE_CHAT_SWITCH_SELECTOR);
+  enableSwitch.checked = state.enableHideChats;
+
+  const enableStatus = document.querySelector(HIDE_CHAT_STATUS_SELECTOR);
+  enableStatus.innerHTML = state.enableHideChats ? 'Enabled' : 'Disabled';
+};
+
+const toggleHideChatEnableSwitch = () => {
+  const enabled = state.enableHideChats;
+  state = Object.assign({}, state, { enableHideChats: !enabled });
+
+  renderHideChatEnableSwitch();
+};
+
+onChange(HIDE_CHAT_SWITCH_SELECTOR, () => toggleHideChatEnableSwitch());
 
 const insertChat = (chat, chats) => {
   const chatsContainer = document.querySelector(CHATS_CONTAINER_SELECTOR);
@@ -28,6 +53,12 @@ const insertChat = (chat, chats) => {
   chatContainer.appendChild(hideContainer);
 
   chatsContainer.appendChild(chatContainer);
+};
+
+const renderChatList = () => {
+  const { chats, hiddenChats } = state;
+  const filteredChats = chats.filter(chat => !hiddenChats.includes(chat.id));
+  filteredChats.forEach(chat => insertChat(chat, chats));
 };
 
 const insertHiddenChat = (chat, chats) => {
@@ -57,26 +88,37 @@ const insertHiddenChat = (chat, chats) => {
   chatsContainer.appendChild(chatContainer);
 };
 
-export const render = (chats, hiddenChats) => {
-  const filteredChats = chats.filter(chat => !hiddenChats.includes(chat.id));
-  filteredChats.forEach(chat => insertChat(chat, chats));
-
+const renderHiddenChatList = () => {
+  const { chats, hiddenChats } = state;
   hiddenChats.forEach((chatId) => {
     const chat = chats.find(c => c.id === chatId) || { id: chatId };
     insertHiddenChat(chat, chats);
   });
 };
 
-export const serialize = () => {
+const serializeHiddenChatList = () => {
   const chatsContainer = document.querySelector(HIDDEN_CHATS_CONTAINER_SELECTOR);
   const hiddenList = chatsContainer.querySelectorAll('tr td:last-child');
 
   return ([...hiddenList]).map(node => node.dataset.chatId);
 };
 
+export const save = () => {
+  const hiddenChats = serializeHiddenChatList();
+
+  state = Object.assign({}, state, { hiddenChats });
+
+  return storage.save(state);
+};
+
 onDocumentReady(() => {
-  const storageParams = { chats: [], hiddenChats: [] };
-  storage.get(storageParams).then(({ chats, hiddenChats }) => {
-    render(chats, hiddenChats);
-  });
+  storage.get(state)
+    .then((response) => {
+      state = Object.assign({}, state, response);
+    })
+    .then(() => renderHideChatEnableSwitch())
+    .then(() => renderChatList())
+    .then(() => renderHiddenChatList());
 });
+
+export default {};

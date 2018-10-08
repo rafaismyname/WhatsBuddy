@@ -1,17 +1,10 @@
-import * as storage from '../helpers/storage';
 import { onClick } from '../helpers/events';
-import { save as saveMacros } from './chat/macros';
-import { serialize as serializeHiddenChats } from './list/chats';
+import { save as saveChat } from './chat/macros';
+import { save as saveList } from './list/chats';
 
 const OPTIONS_SUCCESS_POPUP_SELECTOR = '#whatsbuddy-options-success';
 const OPTIONS_SUCCESS_POPUP_CLASSNAME = 'whatsbuddy-options-success toast toast-success text-center';
 const OPTIONS_SAVE_BUTTON_SELECTOR = '#whatsbuddy-options-save';
-
-const serializeOptions = () => {
-  const hiddenChats = serializeHiddenChats();
-
-  return { hiddenChats };
-};
 
 const successPopup = () => {
   const footer = document.querySelector(OPTIONS_SUCCESS_POPUP_SELECTOR);
@@ -30,12 +23,8 @@ const successPopup = () => {
   footer.appendChild(successMessage);
 };
 
-const saveOptions = () => {
-  const options = serializeOptions();
-
-  saveMacros()
-    .then(() => storage.save(options))
+onClick(OPTIONS_SAVE_BUTTON_SELECTOR, () => {
+  saveChat()
+    .then(() => saveList())
     .then(() => successPopup());
-};
-
-onClick(OPTIONS_SAVE_BUTTON_SELECTOR, () => saveOptions());
+});

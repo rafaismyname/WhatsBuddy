@@ -44,5 +44,5 @@ export const onChange = (selector, callback) => {
     return selector;
   })();
 
-  element.addEventListener('change', event => callback(event), false);
+  element.addEventListener('change', ({ target }) => callback(target), false);
 };

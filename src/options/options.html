@@ -25,7 +25,7 @@
 
         <!-- CHAT MACROS -->
         <div class="column col-6 col-xs-12 col-mx-auto">
-          <div class="panel">
+          <div class="panel pb-2">
             <div class="panel-header">
               <div class="columns">
                 <div class="column col-3">
@@ -34,7 +34,7 @@
                 <div class="column col-3">
                   <div class="form-group">
                     <label class="form-switch">
-                      <input type="checkbox" value="1" id="whatsbuddy-macros-enabled">
+                      <input type="checkbox" id="whatsbuddy-macros-enabled">
                       <i class="form-icon"></i> <span id="whatsbuddy-macros-status"></span>
                     </label>
                   </div>
@@ -46,8 +46,8 @@
                 </div>
               </div>
             </div>
-            <div class="panel-body pb-2">
-              <table class="table table-striped table-hover mb-2">
+            <div class="panel-body mb-2">
+              <table class="table table-striped table-hover">
                 <thead>
                   <th>Macro Name</th>
                   <th>Message</th>
@@ -62,11 +62,23 @@
 
         <!-- CHAT LIST -->
         <div class="column col-6 col-xs-12 col-mx-auto">
-          <div class="panel">
+          <div class="panel pb-2">
             <div class="panel-header">
-              <h4>Chats List</h4>
+              <div class="columns">
+                <div class="column col-3">
+                  <h4>Chats List</h4>
+                </div>
+                <div class="column col-9">
+                  <div class="form-group">
+                    <label class="form-switch">
+                      <input type="checkbox" id="whatsbuddy-hide-chat-enabled">
+                      <i class="form-icon"></i> Hide Chat <span id="whatsbuddy-hide-chat-status"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="panel-body">
+            <div class="panel-body mb-2">
               <div class="columns col-gapless">
                 <div class="column col-6">
                   <h5 class="text-center">Visible Chats</h5>
