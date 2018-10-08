@@ -34,3 +34,15 @@ export const onClick = (selector, callback) => {
 
   element.addEventListener('click', ({ target }) => callback(target), false);
 };
+
+export const onChange = (selector, callback) => {
+  const element = (() => {
+    if (typeof selector === 'string') {
+      return document.querySelector(selector);
+    }
+
+    return selector;
+  })();
+
+  element.addEventListener('change', event => callback(event), false);
+};

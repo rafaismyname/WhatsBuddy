@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./options.scss" />
   </head>
   <body>
+    <!-- HEADER -->
     <header class="container">
       <section class="columns text-center mt-2">
         <div class="column col-12">
@@ -16,27 +17,37 @@
       </section>
     </header>
 
+    <!-- MAIN CONTENT -->
     <main class="container">
       <section class="columns">
-        <div class="column col-12 mb-2" id="whatsbuddy-options-success">
-        </div>
+        <!-- SUCCESS ALERT -->
+        <div class="column col-12 mb-2" id="whatsbuddy-options-success"></div>
 
+        <!-- CHAT MACROS -->
         <div class="column col-6 col-xs-12 col-mx-auto">
           <div class="panel">
             <div class="panel-header">
               <div class="columns">
-                <div class="column col-8">
-                  <h4>Message Macros</h4>
+                <div class="column col-3">
+                  <h4>Chat Macros</h4>
                 </div>
-                <div class="column col-4 text-right">
+                <div class="column col-3">
+                  <div class="form-group">
+                    <label class="form-switch">
+                      <input type="checkbox" value="1" id="whatsbuddy-macros-enabled">
+                      <i class="form-icon"></i> <span id="whatsbuddy-macros-status"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="column col-6 text-right">
                   <button class="btn btn-sm" id="whatsbuddy-options-add-macro">
                     <i class="icon icon-plus"></i> Macro
                   </button>
                 </div>
               </div>
             </div>
-            <div class="panel-body">
-              <table class="table table-striped table-hover">
+            <div class="panel-body pb-2">
+              <table class="table table-striped table-hover mb-2">
                 <thead>
                   <th>Macro Name</th>
                   <th>Message</th>
@@ -49,6 +60,7 @@
           </div>
         </div>
 
+        <!-- CHAT LIST -->
         <div class="column col-6 col-xs-12 col-mx-auto">
           <div class="panel">
             <div class="panel-header">
@@ -86,6 +98,7 @@
           </div>
         </div>
 
+        <!-- SAVE BTN -->
         <div class="column col-12 mt-2">
           <button class="btn btn-block btn-success" id="whatsbuddy-options-save">
             <i class="icon icon-check"></i> Save options
