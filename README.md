@@ -2,6 +2,8 @@
 # WhatsBuddy
 > WebExtension that gives your WhatsApp Web SUPER POWERS! 🖥💬⚡️🔥
 
+[![npm version](https://badge.fury.io/js/whatsbuddy.svg)](https://badge.fury.io/js/whatsbuddy)
+
 🤘🏼Hide List: Hide annoying contacts! Keep your chatlist enjoyable again!
 
 ⚡️Message Macros: Add quick message macros for a faster response!
@@ -31,10 +33,7 @@ Just make sure to follow [Airbnb's JS Style Guidelines](https://github.com/airbn
 
 ## Release History
 
-* 0.1.0 - First Release!
-    * Messages Macros
-    * WYSI**N**WYG
-    * Styled options screen
+Check  [CHANGELOG.md](https://github.com/rafaismyname/whatsbuddy/blob/master/CHANGELOG.md) for updated Release/Changes history.
 
 ## Authors
 
