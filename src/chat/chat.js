@@ -1,5 +1,5 @@
 import * as storage from '../helpers/storage';
-import { onDocumentReady, onChatOpen } from '../helpers/events';
+import { onChatOpen } from '../helpers/events';
 
 const MESSAGE_INPUT_SELECTOR = '#main footer div[contenteditable]';
 const SEND_BUTTON_CHILD_SELECTOR = '#main footer button span[data-icon=send]';
@@ -64,7 +64,7 @@ const formatSelectedText = (wrapper) => {
   return insertMessageText(replacementText);
 };
 
-onChatOpen(() => {
+const chatOpenCallback = () => {
   const toolsContainer = document.createElement('div');
   toolsContainer.id = TOOLS_CONTAINER_ID;
 
@@ -125,9 +125,13 @@ onChatOpen(() => {
 
   const footerContainer = document.querySelector(CHAT_FOOTER_SELECTOR);
   footerContainer.insertBefore(toolsContainer, footerContainer.firstChild);
-});
+};
 
-onDocumentReady(() => {
-  const storageParams = { macros: [] };
-  storage.get(storageParams).then(({ macros }) => chatMacros.push(...macros));
+const storageParams = { macrosEnabled: true, macros: [] };
+storage.get(storageParams).then(({ macrosEnabled, macros }) => {
+  if (!macrosEnabled) return;
+
+  chatMacros.push(...macros);
+
+  onChatOpen(() => chatOpenCallback());
 });
