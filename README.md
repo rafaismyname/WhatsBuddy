@@ -1,4 +1,3 @@
-
 # WhatsBuddy
 > WebExtension that gives your WhatsApp Web SUPER POWERS! 🖥💬⚡️🔥
 > [![Available @ Chrome Web Store](https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://chrome.google.com/webstore/detail/whatsbuddy/ejliopghaapgmlgabgchokefmlfbaikh)
