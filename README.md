@@ -1,5 +1,5 @@
 # WhatsBuddy
-> WebExtension that gives your WhatsApp Web SUPER POWERS! 🖥💬⚡️🔥
+> WebExtension that gives your WhatsApp Web™️ SUPER POWERS! 🖥💬⚡️🔥
 
 [![Available @ Chrome Web Store](https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://chrome.google.com/webstore/detail/whatsbuddy/ejliopghaapgmlgabgchokefmlfbaikh)
 [![npm version](https://badge.fury.io/js/whatsbuddy.svg)](https://badge.fury.io/js/whatsbuddy)
@@ -33,7 +33,7 @@ Just make sure to follow [Airbnb's JS Style Guidelines](https://github.com/airbn
 
 ## Release History
 
-Check  [CHANGELOG.md](https://github.com/rafaismyname/whatsbuddy/blob/master/CHANGELOG.md) for updated Release/Changes history.
+Check [CHANGELOG.md](https://github.com/rafaismyname/whatsbuddy/blob/master/CHANGELOG.md) for updated Release/Changes history.
 
 ## Authors
 
@@ -43,11 +43,11 @@ See also the list of [contributors](https://github.com/rafaismyname/whatsbuddy/c
 
 ## License
 
-This project is licensed under the MIT License - see the  [LICENSE.md](https://github.com/rafaismyname/whatsbuddy/blob/master/LICENSE.md)  file for details
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/rafaismyname/whatsbuddy/blob/master/LICENSE.md)  file for details
 
 ## Versioning
 
-We use  [SemVer](http://semver.org/)  for versioning. For the versions available, see the  [tags on this repository](https://github.com/rafaismyname/whatsbuddy/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/rafaismyname/whatsbuddy/tags).
 
 ## Contributing
 

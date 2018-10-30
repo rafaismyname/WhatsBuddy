@@ -1,3 +1,6 @@
+## 0.2.2 - Takedown fix (2018-10-30)
+  * Changed logo and description for trademark compliance
+
 ## 0.2.1 - More controls (2018-10-08)
   * New option: Enable/Disable Chat tools (macros/wysi**n**wyg)!
   * New option: Enable/Disable Hide chat from list!
