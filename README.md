@@ -1,7 +1,7 @@
 # WhatsBuddy
 > WebExtension that gives your WhatsApp Web™️ SUPER POWERS! 🖥💬⚡️🔥
 
-[![Available @ Chrome Web Store](https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://chrome.google.com/webstore/detail/whatsbuddy/ejliopghaapgmlgabgchokefmlfbaikh)
+[![Available @ Chrome Web Store](https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://chrome.google.com/webstore/detail/wabuddy/kpakemodngdilkffhnfofaggnfgclgao)
 [![npm version](https://badge.fury.io/js/whatsbuddy.svg)](https://badge.fury.io/js/whatsbuddy)
 
 🤘🏼Hide List: Hide annoying contacts! Keep your chatlist enjoyable again!
@@ -12,7 +12,7 @@
 
 ## Installing
 
-[WhatsBuddy @ Chrome Web Store](https://chrome.google.com/webstore/detail/whatsbuddy/ejliopghaapgmlgabgchokefmlfbaikh)
+[WhatsBuddy @ Chrome Web Store](https://chrome.google.com/webstore/detail/wabuddy/kpakemodngdilkffhnfofaggnfgclgao)
 
 [WhatsBuddy @ Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/whatsbuddy/)
 
