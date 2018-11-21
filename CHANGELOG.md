@@ -1,3 +1,6 @@
+## 0.2.3 - Hidelist fix (2018-11-21)
+  * Hidelist bug fix
+
 ## 0.2.2 - Takedown fix (2018-10-30)
   * Changed logo and description for trademark compliance
 

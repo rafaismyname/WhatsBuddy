@@ -14,9 +14,9 @@ const sidePaneLoadCallback = (sidePane) => {
   window.addEventListener('error', () => document.location.reload());
 };
 
-const storageParams = { enableHideChats: true, hiddenChats: [] };
-storage.get(storageParams).then(({ enableHideChats, hiddenChats }) => {
-  if (!enableHideChats || hiddenChats.length === 0) return;
+const storageParams = { enableHideChats: true };
+storage.get(storageParams).then(({ enableHideChats }) => {
+  if (!enableHideChats) return;
 
   onSidePaneLoaded(sidePane => sidePaneLoadCallback(sidePane));
 });

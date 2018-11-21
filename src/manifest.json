@@ -3,7 +3,7 @@
 
   "name": "WABuddy",
   "description": "WebExtension that adds extra functionalities to WhatsApp Web™️",
-  "version": "0.2.2",
+  "version": "0.2.4",
 
   "icons": {
     "512": "./icons/icon.png",
