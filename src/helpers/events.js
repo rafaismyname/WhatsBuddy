@@ -1,4 +1,4 @@
-const CHAT_CONTAINER_SELECTOR = '#main div[data-asset-chat-background]';
+const CHAT_CONTAINER_SELECTOR = '#main div[data-asset-chat-background], #main div[data-asset-chat-background-dark]';
 
 export const onDocumentReady = (callback) => {
   if (document.attachEvent ? document.readyState === 'complete' : document.readyState !== 'loading') {
