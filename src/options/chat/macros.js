@@ -27,7 +27,7 @@ const renderEnableSwitch = () => {
 
 const toggleEnableSwitch = () => {
   const enabled = state.macrosEnabled;
-  state = Object.assign({}, state, { macrosEnabled: !enabled });
+  state = { ...state, macrosEnabled: !enabled };
 
   renderEnableSwitch();
 };
@@ -105,7 +105,7 @@ onClick(ADD_MACRO_BUTTON_SELECTOR, () => insertMacro());
 export const save = () => {
   const macros = serializeMacros();
 
-  state = Object.assign({}, state, { macros });
+  state = { ...state, macros };
 
   return storage.save(state);
 };
@@ -113,7 +113,7 @@ export const save = () => {
 onDocumentReady(() => {
   storage.get(state)
     .then((response) => {
-      state = Object.assign({}, state, response);
+      state = { ...state, ...response };
     })
     .then(() => renderEnableSwitch())
     .then(() => renderMacros());

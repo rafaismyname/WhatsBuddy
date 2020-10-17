@@ -18,5 +18,5 @@ const storageParams = { enableHideChats: true };
 storage.get(storageParams).then(({ enableHideChats }) => {
   if (!enableHideChats) return;
 
-  onSidePaneLoaded(sidePane => sidePaneLoadCallback(sidePane));
+  onSidePaneLoaded((sidePane) => sidePaneLoadCallback(sidePane));
 });

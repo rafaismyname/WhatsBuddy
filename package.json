@@ -24,14 +24,14 @@
     "build": "parcel build src/manifest.json"
   },
   "devDependencies": {
-    "eslint": "^4.13.1",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.8.0",
-    "parcel": "^1.10.1",
-    "parcel-plugin-web-extension": "^1.4.0",
-    "sass": "^1.14.1"
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "parcel": "^1.12.4",
+    "parcel-plugin-web-extension": "^1.6.1",
+    "sass": "^1.27.0"
   },
   "dependencies": {
-    "spectre.css": "^0.5.3"
+    "spectre.css": "^0.5.9"
   }
 }
