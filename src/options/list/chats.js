@@ -22,7 +22,7 @@ const renderHideChatEnableSwitch = () => {
 
 const toggleHideChatEnableSwitch = () => {
   const enabled = state.enableHideChats;
-  state = Object.assign({}, state, { enableHideChats: !enabled });
+  state = { ...state, enableHideChats: !enabled };
 
   renderHideChatEnableSwitch();
 };
@@ -57,8 +57,8 @@ const insertChat = (chat, chats) => {
 
 const renderChatList = () => {
   const { chats, hiddenChats } = state;
-  const filteredChats = chats.filter(chat => !hiddenChats.includes(chat.id));
-  filteredChats.forEach(chat => insertChat(chat, chats));
+  const filteredChats = chats.filter((chat) => !hiddenChats.includes(chat.id));
+  filteredChats.forEach((chat) => insertChat(chat, chats));
 };
 
 const insertHiddenChat = (chat, chats) => {
@@ -91,7 +91,7 @@ const insertHiddenChat = (chat, chats) => {
 const renderHiddenChatList = () => {
   const { chats, hiddenChats } = state;
   hiddenChats.forEach((chatId) => {
-    const chat = chats.find(c => c.id === chatId) || { id: chatId };
+    const chat = chats.find((c) => c.id === chatId) || { id: chatId };
     insertHiddenChat(chat, chats);
   });
 };
@@ -100,13 +100,13 @@ const serializeHiddenChatList = () => {
   const chatsContainer = document.querySelector(HIDDEN_CHATS_CONTAINER_SELECTOR);
   const hiddenList = chatsContainer.querySelectorAll('tr td:last-child');
 
-  return ([...hiddenList]).map(node => node.dataset.chatId);
+  return ([...hiddenList]).map((node) => node.dataset.chatId);
 };
 
 export const save = () => {
   const hiddenChats = serializeHiddenChatList();
 
-  state = Object.assign({}, state, { hiddenChats });
+  state = { ...state, hiddenChats };
 
   return storage.save(state);
 };
@@ -114,7 +114,7 @@ export const save = () => {
 onDocumentReady(() => {
   storage.get(state)
     .then((response) => {
-      state = Object.assign({}, state, response);
+      state = { ...state, ...response };
     })
     .then(() => renderHideChatEnableSwitch())
     .then(() => renderChatList())

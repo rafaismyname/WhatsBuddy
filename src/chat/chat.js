@@ -1,9 +1,9 @@
 import * as storage from '../helpers/storage';
-import { onChatOpen } from '../helpers/events';
+import { onChatOpen } from './events';
 
 const MESSAGE_INPUT_SELECTOR = '#main footer div[contenteditable]';
 const SEND_BUTTON_CHILD_SELECTOR = '#main footer button span[data-icon=send]';
-const CHAT_FOOTER_SELECTOR = '#main div[data-asset-chat-background] ~ footer';
+const CHAT_FOOTER_SELECTOR = '#main div[data-asset-chat-background] ~ footer, #main div[data-asset-chat-background-dark] ~ footer';
 
 const TOOLS_CONTAINER_ID = 'whatsbuddy-tools-container';
 const TOOLS_BUTTON_CLASSNAME = 'whatsbuddy-tools-button';

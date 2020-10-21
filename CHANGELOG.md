@@ -1,3 +1,6 @@
+## 0.2.4 - Hidelist fix (2020-10-21)
+  * Hidelist bug fix
+
 ## 0.2.3 - Hidelist fix (2018-11-21)
   * Hidelist bug fix
 
