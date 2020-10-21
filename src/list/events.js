@@ -20,4 +20,4 @@ export const onSidePaneLoaded = (callback) => {
   return paneObserver.observe(document, { childList: true, subtree: true });
 };
 
-export default {};
+export default { onSidePaneLoaded };
